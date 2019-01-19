@@ -5,7 +5,7 @@ PokerLib can take either a relative filepath or a string array as input and disp
 PokerLib has implementation of Flush, 3 of a kind, pair, and high card hands, and is able to determine when there is a draw for any set of 5 card hands.
 
 PokerClient is a simple client program that uses PokerLib to determine the hand winner. The implementation in PokerClient only takes the name of a .txt file as input.
-Simply download the **bin** folder in this repository to gt both PokerClient and PokerLib.
+Simply download the **bin** folder in this repository to get both PokerClient and PokerLib.
 
 Also included in the **bin** folder is the input.txt file, containing:
 ```
