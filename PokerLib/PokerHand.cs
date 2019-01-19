@@ -66,12 +66,12 @@ namespace PokerLib
                 }
             }
 
-            if (IsMultiofKind(4, 0))
+            if (IsMultipleOfValue(4, 0))
             {
                 return PokerHandType.FourOfKind;
             }
 
-            if (IsMultiofKind(3, 0) && IsMultiofKind(2, 3))
+            if (IsMultipleOfValue(3, 0) && IsMultipleOfValue(2, 3))
             {
                 return PokerHandType.FullHouse;
             }
@@ -90,14 +90,14 @@ namespace PokerLib
                 return PokerHandType.Straight;
             }
 
-            if (IsMultiofKind(3, 0))
+            if (IsMultipleOfValue(3, 0))
             {
                 return PokerHandType.ThreeOfKind;
             }
 
-            else if (IsMultiofKind(2, 0))
+            else if (IsMultipleOfValue(2, 0))
             {
-                if (IsMultiofKind(2, 2))
+                if (IsMultipleOfValue(2, 2))
                 {
                     return PokerHandType.TwoPair;
                 }
@@ -133,7 +133,7 @@ namespace PokerLib
             return straight;
         }
 
-        private bool IsMultiofKind(int repeat, int offset)
+        private bool IsMultipleOfValue(int repeat, int offset)
         {
             int sameValueCount;
             int bestMultiIndex = -1;
@@ -146,7 +146,7 @@ namespace PokerLib
                         if (PokerCardList[i].Value == PokerCardList[j].Value)
                             sameValueCount++;
 
-                if (sameValueCount == repeat) //find multiple of a kind
+                if (sameValueCount == repeat) //find multiple of a value
                 {
                     if (bestMultiIndex >= 0)
                     {
@@ -158,9 +158,9 @@ namespace PokerLib
                 }
             }
 
-            if (bestMultiIndex >= 0) //If there is a multiple of a kind
+            if (bestMultiIndex >= 0) //If there is a multiple of a value
             {
-                for (int i = offset; i < PokerCardList.Count; i++) //First add the multiple of a kind to the high card list
+                for (int i = offset; i < PokerCardList.Count; i++) //First add the multiple of a Value to the high card list
                     if (PokerCardList[i].Value == PokerCardList[bestMultiIndex].Value)
                         HighCardList.Add(PokerCardList[i]);
 
