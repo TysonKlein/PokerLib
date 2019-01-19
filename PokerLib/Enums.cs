@@ -14,7 +14,8 @@ namespace PokerLib
         Flush,
         FullHouse,
         FourOfKind,
-        StraightFlush
+        StraightFlush, 
+        RoyalFlush
     }
 
     public enum PokerCardSuit

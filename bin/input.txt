@@ -1,6 +1,18 @@
 Joe
-QD, 8D, KD, 7D, 3D
+QD, 8C, KD, 7D, 3D
 Bob
-AS, QS, 8S, 6S, 4S
+AC, QS, 8S, 6S, 4S
 Sally
 4S, 4H, 3H, QC, 8C
+Bill
+6H, 3D, 9s, 9H, 8D
+Tim
+3C, 6S, 3C, 4S, 4H
+McMann
+3D, 5H, 3C, 4d, 4H
+Lonny
+10C, 9D, 8H, 7H, 6H
+Homer
+3D, 8H, jS, 4S, 5S
+Pete
+2S, AC, AH, 9C, 9H

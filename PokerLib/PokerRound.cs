@@ -31,6 +31,7 @@ namespace PokerLib
                 Console.WriteLine("Error: " + e.Message);
             }
         }
+
         //Constructor if text is given as string array
         public PokerRound(string[] newLines)
         {
@@ -49,7 +50,7 @@ namespace PokerLib
                     throw new Exception("Must have even number of lines in input file (Name / Hand on alternating lines)" + Lines.Length);
 
                 List<PokerHand> pokerHandList = new List<PokerHand>();      //List for all hands
-                List<PokerHand> highHandList = new List<PokerHand>();       //List for highest subset of hands
+                List<PokerHand> highHandList = new List<PokerHand>();       //List for high subset of hands
                 List<PokerHand> highestHandList = new List<PokerHand>();    //List for highest hands after high card tiebreaker
 
                 //Add all poker hands from lines in the text file
@@ -64,7 +65,7 @@ namespace PokerLib
                     if (pokerHandList[i].HandType == pokerHandList[0].HandType)
                         highHandList.Add(pokerHandList[i]);
 
-                //Create bool list to determine which Hands to eliminate after tiebreaker
+                //Create bool list to determine which Hands to keep after tiebreaker
                 List<bool> keepHighHand = new List<bool>();
 
                 for (int i = 0; i < highHandList.Count; i++)
@@ -93,8 +94,7 @@ namespace PokerLib
                         highestHandList.Add(highHandList[i]);
 
                 //Write all winners to the console
-                if (highestHandList.Count == 1)
-                {
+                if (highestHandList.Count == 1) {
                     Console.WriteLine("Winner: " + highestHandList[0].Name + "(" + highestHandList[0].HandType + ")");
                 }
                 else {

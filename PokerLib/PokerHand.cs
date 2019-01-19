@@ -55,13 +55,22 @@ namespace PokerLib
         {
             //This is the list used for tiebreakers
             HighCardList = new List<PokerCard>();
+
+            //First, sort the hand in descending order of value
             PokerCardList = PokerCardList.OrderByDescending(f => f.Value).ToList();
 
+
+            ////////////////////////////////////////////////////////////////////////////
+            //Determine hand in descending order of priority
             if(IsFlush())
             {
                 if(IsStraight())
                 {
                     HighCardList = PokerCardList;
+                    if(PokerCardList[0].Value == PokerCardValue.Ace) //If highest card is an Ace
+                    {
+                        return PokerHandType.RoyalFlush;
+                    }
                     return PokerHandType.StraightFlush;
                 }
             }
@@ -106,6 +115,7 @@ namespace PokerLib
 
             HighCardList = PokerCardList;
             return PokerHandType.HighCard;
+            ////////////////////////////////////////////////////////////////////////////
         }
 
         private bool IsFlush()
