@@ -8,8 +8,13 @@ namespace PokerLib
     {
         HighCard,
         Pair,
+        TwoPair,
         ThreeOfKind,
-        Flush
+        Straight,
+        Flush,
+        FullHouse,
+        FourOfKind,
+        StraightFlush
     }
 
     public enum PokerCardSuit

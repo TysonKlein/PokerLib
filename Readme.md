@@ -2,7 +2,7 @@
 PokerLib is a C# library designed to determine the winner between a set of poker hands. 
 
 PokerLib can take either a relative filepath or a string array as input and displays output in the console window.
-PokerLib has implementation of Flush, 3 of a kind, pair, and high card hands, and is able to determine when there is a draw for any set of 5 card hands.
+PokerLib has implementation **all poker hands**: Sraight Flush, 4 of a kind, Full House, Flush, Straight, 3 of a kind, 2 pair, pair, and high card hands. PokerLib is also able to determine when there is a draw for any set of 5 card hands.
 
 PokerClient is a simple client program that uses PokerLib to determine the hand winner. The implementation in PokerClient only takes the name of a .txt file as input.
 Simply download the **bin** folder in this repository to get both PokerClient and PokerLib.

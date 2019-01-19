@@ -41,8 +41,12 @@ namespace PokerLib
         {
             try
             {
-                if (Lines.Length % 2 != 0)
-                    throw new Exception("Must have even number of lines in input file (Name / Hand on alternating lines)");
+                for (int i = 0; i < Lines.Length; i++)
+                {
+                    Console.WriteLine(Lines[i]);
+                }
+                if (Lines.Length % 2 != 0 || Lines.Length == 0)
+                    throw new Exception("Must have even number of lines in input file (Name / Hand on alternating lines)" + Lines.Length);
 
                 List<PokerHand> pokerHandList = new List<PokerHand>();      //List for all hands
                 List<PokerHand> highHandList = new List<PokerHand>();       //List for highest subset of hands
@@ -89,8 +93,21 @@ namespace PokerLib
                         highestHandList.Add(highHandList[i]);
 
                 //Write all winners to the console
-                for (int i = 0; i < highestHandList.Count; i++)
-                    Console.WriteLine(highestHandList[i].Name + ": " + highestHandList[i].HandType);
+                if (highestHandList.Count == 1)
+                {
+                    Console.WriteLine("Winner: " + highestHandList[0].Name + "(" + highestHandList[0].HandType + ")");
+                }
+                else {
+                    Console.Write("Winners: ");
+                    for (int i = 0; i < highestHandList.Count; i++)
+                    {
+                        Console.Write(highestHandList[i].Name + "(" + highestHandList[i].HandType + ")");
+                        if(i < highestHandList.Count - 1)
+                        {
+                            Console.Write(", ");
+                        }
+                    }
+                }
             }
 
             catch (Exception e)
