@@ -36,10 +36,10 @@ HAND
 Where any name is valid and all hands must be in the form of VALUE|SUIT and must have exactly 5 cards.
 Any valid set of 5 card hands will be accepted. All cards **must be separated by a comma**, but the library will help if you run into formatting issues.
 
-##Assumptions
+## Assumptions
 The following are all assumptions used to code PokerLib. Note that some robustness has been built around these assumptions to help guide the user to create a correct input.
 * All inputs must have an even number of lines (Name, Cards) repeating 1 or more times
-* All hands consist of 5 cars
+* All hands consist of 5 cards
 * All cards are separated by **exactly** one comma and 0 or more whitespace
 * All cards accept lower or uppercase letters, and only certain values **(2, 3, 4, 5, 6, 7, 8, 9, 10, j|J, q|Q, k|K, a|A)** and suits **(s|S, c|C, h|H, d|D)** will make the program yield an output
 * **Any poker hand is valid**, and all poker hands are evaluated in traditional 5 card poker priority
