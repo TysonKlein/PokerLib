@@ -40,9 +40,7 @@ namespace PokerLib
             if (pokerCardCode.Length == 3)
             {
                 if (pokerCardCode.Substring(0, 2) == "10")
-                {
                     return PokerCardValue.Ten;
-                }
                 else
                     throw new Exception(pokerCardCode.Substring(0, 2) + " is not a valid card value (2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A)");
             }

@@ -34,6 +34,7 @@ namespace PokerLib
             if (PokerCardsLine.Split(',').Length - 1 != 4)
                 throw new Exception("Each hand must have exactly 5 cards");
 
+            //Remove whitespace
             PokerCardsLine = PokerCardsLine.Replace(" ", "");
 
             for (int i = 0; i < 5; i++)
@@ -52,118 +53,94 @@ namespace PokerLib
 
         private PokerHandType FindHandType()
         {
+            //This is the list used for tiebreakers
             HighCardList = new List<PokerCard>();
-
             PokerCardList = PokerCardList.OrderByDescending(f => f.Value).ToList();
 
+            ///////////////////////////////////////////////////////////////////////////
             //Determine if the hand is a flush
-            bool isFlush = true;
-            PokerCardSuit flushSuit = PokerCardList[0].Suit;
+                bool isFlush = true;
+                PokerCardSuit flushSuit = PokerCardList[0].Suit;
 
+            //If any suits do not match, not a flush
             for (int i = 1; i < PokerCardList.Count; i++)
-            {
                 if (PokerCardList[i].Suit != flushSuit)
                     isFlush = false;
-            }
 
             if (isFlush)
             {
                 HighCardList = PokerCardList;
                 return PokerHandType.Flush;
             }
+            ///////////////////////////////////////////////////////////////////////////
 
+
+            ///////////////////////////////////////////////////////////////////////////
             //Determine if the hand is a 3 of a kind or a pair
             int sameValueCount;
-            int best3oKIndex = -1;
-            int best2oKIndex = -1;
-
+            int best3ofKindIndex = -1;
+            int best2ofKindIndex = -1;
 
             for (int i = 0; i < PokerCardList.Count; i++)
             {
                 sameValueCount = 1;
                 for (int j = 0; j < PokerCardList.Count; j++)
-                {
                     if (i != j)
-                    {
                         if (PokerCardList[i].Value == PokerCardList[j].Value)
-                        {
                             sameValueCount++;
-                        }
-                    }
-                }
-                if (sameValueCount > 2) //For 3 of a kind
+
+                if (sameValueCount > 2) //find 3 of a kind
                 {
-                    if (best3oKIndex >= 0)
-                    {
-                        if (PokerCardList[best3oKIndex].Value < PokerCardList[i].Value)
-                        {
-                            best3oKIndex = i;
-                        }
-                    }
+                    if (best3ofKindIndex >= 0)
+                        if (PokerCardList[best3ofKindIndex].Value < PokerCardList[i].Value)
+                            best3ofKindIndex = i;
                     else
-                    {
-                        best3oKIndex = i;
-                    }
+                        best3ofKindIndex = i;
                 }
 
-                else if (sameValueCount == 2) //For pairs
+                else if (sameValueCount == 2) //find pairs
                 {
-                    if (best3oKIndex >= 0)
-                    {
-                        if (PokerCardList[best2oKIndex].Value < PokerCardList[i].Value)
-                        {
-                            best2oKIndex = i;
-                        }
-                    }
+                    if (best2ofKindIndex >= 0)
+                        if (PokerCardList[best2ofKindIndex].Value < PokerCardList[i].Value)
+                            best2ofKindIndex = i;
                     else
-                    {
-                        best2oKIndex = i;
-                    }
+                        best2ofKindIndex = i;
                 }
             }
 
-            if(best3oKIndex >= 0)
+            if(best3ofKindIndex >= 0) //If there is a 3 of a kind
             {
-                for (int i = 0; i < PokerCardList.Count; i++)
-                {
-                    if(PokerCardList[i].Value == PokerCardList[best3oKIndex].Value)
-                    {
+                for (int i = 0; i < PokerCardList.Count; i++) //First add the 3 of a kind to the high card list
+                    if (PokerCardList[i].Value == PokerCardList[best3ofKindIndex].Value)
                         HighCardList.Add(PokerCardList[i]);
-                    }
-                }
-                for (int i = 0; i < PokerCardList.Count; i++)
-                {
-                    if (PokerCardList[i].Value != PokerCardList[best3oKIndex].Value)
-                    {
+
+                for (int i = 0; i < PokerCardList.Count; i++) //Then add all other cards in descending order
+                    if (PokerCardList[i].Value != PokerCardList[best3ofKindIndex].Value)
                         HighCardList.Add(PokerCardList[i]);
-                    }
-                }
 
                 return PokerHandType.ThreeOfKind;
             }
 
-            else if (best2oKIndex >= 0)
+            else if (best2ofKindIndex >= 0) //If there is a pair
             {
-                for (int i = 0; i < PokerCardList.Count; i++)
-                {
-                    if (PokerCardList[i].Value == PokerCardList[best2oKIndex].Value)
-                    {
+                for (int i = 0; i < PokerCardList.Count; i++) //First add the pair to the high card list
+                    if (PokerCardList[i].Value == PokerCardList[best2ofKindIndex].Value)
                         HighCardList.Add(PokerCardList[i]);
-                    }
-                }
-                for (int i = 0; i < PokerCardList.Count; i++)
-                {
-                    if (PokerCardList[i].Value != PokerCardList[best2oKIndex].Value)
-                    {
+
+                for (int i = 0; i < PokerCardList.Count; i++) //Then add all other cards in descending order
+                    if (PokerCardList[i].Value != PokerCardList[best2ofKindIndex].Value)
                         HighCardList.Add(PokerCardList[i]);
-                    }
-                }
 
                 return PokerHandType.Pair;
             }
+            ///////////////////////////////////////////////////////////////////////////
 
+
+            ///////////////////////////////////////////////////////////////////////////
+            //If nothing else, its a high card
             HighCardList = PokerCardList;
             return PokerHandType.HighCard;
+            ///////////////////////////////////////////////////////////////////////////
         }
     }
 }
