@@ -44,4 +44,7 @@ The following are all assumptions used to code PokerLib. Note that some robustne
 * All cards accept lower or uppercase letters, and only certain values **(2, 3, 4, 5, 6, 7, 8, 9, 10, j|J, q|Q, k|K, a|A)** and suits **(s|S, c|C, h|H, d|D)** will make the program yield an output
 * **Any poker hand is valid**, and all poker hands are evaluated in traditional 5 card poker priority
 * Tiebreakers are determined with card value (Higher 3 of a kind winds, then next highest card, etc.)
-* If tiebreaker doesn't resolve, a ist of winners is produced
+* If tiebreaker doesn't resolve, a list of winners is produced
+
+* Impossible hands (ex. repeating cards 4H, 4H, 4H, 3S, 8S) are acceptable inputs
+* Duplicate values between hands (Sally and Bob both have a 3H) are acceptable inputs
